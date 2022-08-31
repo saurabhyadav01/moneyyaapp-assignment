@@ -6,11 +6,15 @@
 .product-container
 {
     display: grid;
-    
+    height: 200px;
 
 }
 
-.product-itme>img
+.product-item>img
 {
    width: 500%;
+
+}
+.product-item>h4{
+    text-decoration: none;
 }

@@ -1,23 +1,19 @@
 import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import axios from "axios";
-// import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-// import {
-//   fetchSelectedProduct,
-//   setectedProduct,
-// } from "../redux/actions/productActions";
-// import {
-//   fetchCartProduct,
-//   Post_Cart_Product,
-// } from "../redux/actions/cartItemActions";
+import { add_cart_item } from "../redux/cartRedux/CartConstant";
+import { useNavigate } from "react-router-dom";
 // import { useSelector } from "react-redux";
 
 
 const ProductDetails = () => {
-  //const product = useSelector((state) => state.product);
-//   const dispatch = useDispatch();
+  const {cartData} = useSelector((state) => state.CartReducer);
+  console.log("CARTDATA",cartData)
+  const dispatch = useDispatch();
   const { id } = useParams();
+  const navigate=useNavigate()
   // console.log(id)
 
   //console.log(product.products)
@@ -39,17 +35,6 @@ const  [product,setproduct]=useState({})
       tribe: product.tribe,
     };
 
-    // axios.post(`https://ecommrcebackend.herokuapp.com/carts`,cartData).then((res)=>
-    // {
-    //    console.log(res.data);
-
-    // }).catch((e)=>
-    // {
-
-    //   console.log("err"+e)
-
-    // })
-   //dispatch(Post_Cart_Product(cartData));
   };
   
   const fetchProductDetails = async () => {
@@ -61,14 +46,15 @@ const  [product,setproduct]=useState({})
       });
       setproduct({...res.data})
 }
-// console.log(product)
+
   useEffect(()=>
   {
-    fetchProductDetails()
+    fetchProductDetails();
+    // dispatch(fetchSelectedProduct(id));
   },[])
 
-//   dispatch(fetchSelectedProduct(id));
-//   dispatch(fetchCartProduct());
+ 
+
 
  
   return (
@@ -133,14 +119,14 @@ const  [product,setproduct]=useState({})
           />
         </div>
         <div style={{ width: "50%",fontSize:"16px",padding:"2%",lineHeight:"16px"}}>
-          <h4>{product.title}</h4>
-          <h4>Price  :{product.price}</h4>
-          {/* <h4>Rating:{product.rating.rate}</h4> */}
-          <h4>Category  :{product.category}</h4>
-          <h4>description  :{product.description}</h4>
-          <h4>Tribe   :{product.tribe}</h4>
+          <h4 style={{paddingTop:"1%"}} >{product.title}</h4>
+          <h4 style={{paddingTop:"1%"}} >Price  :{product.price}</h4>
+    
+          <h4 style={{paddingTop:"1%"}} >Category  :{product.category}</h4>
+          <h4 style={{paddingTop:"1%"}}>description  :{product.description}</h4>
+          <h4 style={{paddingTop:"1%"}} >Tribe   :{product.tribe}</h4>
 
-          <h4>Discount:{product.discount}</h4>
+          <h4 style={{paddingTop:"1%"}} >Discount:{product.discount}</h4>
 
          <div style={{display:"flex",margin:"2px",width:"100%"}}>
          <button
@@ -155,8 +141,15 @@ const  [product,setproduct]=useState({})
              border:"none"
            }}
            onClick={() => {
-             addToCart();
-             alert("Product Added In Cart");
+            let itemIndex=cartData.findIndex((e)=>e.id==product.id)
+            console.log(itemIndex)
+            if(itemIndex!=-1){
+              alert("product is already in the cart !!")
+              return 
+            }
+            // if there is no duplicate product then add it to cart
+           dispatch(add_cart_item (product));
+           alert(`${product.title} added in the cart !!`)
            }}
          >
            Add To Cart
@@ -175,8 +168,7 @@ const  [product,setproduct]=useState({})
             border:"none"
           }}
           onClick={() => {
-            addToCart();
-            alert("Reviws Added ");
+          
           }}
         >
           Add Review

@@ -10,13 +10,17 @@
     height: 50px;
 
     margin: auto;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .main-header-div>h2
 {
 padding:.5%;
-margin-left: 2%
-}
 
+}
+i{
+  padding-top:2%;
+  margin: 2%;
+}
 .header-background
 {
     width: 100%;

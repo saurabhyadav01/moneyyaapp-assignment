@@ -2,140 +2,113 @@ import React, { useEffect, useState } from "react";
 import Header from "./Header";
 
 import { Link, useNavigate } from "react-router-dom";
-
+import { Box, Button, getFormControlLabelUtilityClasses, Typography } from "@mui/material";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
+import { delete_cart_item } from "../redux/cartRedux/CartConstant";
 
-
+import EmptyCart from "./EmptyCart";
+import Footer from "./Footer";
 
 
  const  Cart=()=>
 {
-//   const navigate=useNavigate()
-//   const loginData = useSelector((store) => store.loginData.loading);
-  
-// if(loginData)
+  const {cartData }= useSelector((store)=>store.CartReducer);
+  const navigate=useNavigate()
+  const dispatch=useDispatch()
+
+ 
+  const [incProduct, setIncProduct] = useState(1);
+  const [data,setData]=useState([]);
+  let id=""
+  useEffect(() => {
+    
+  }, []);
+
+ 
+  const numberOfItem = cartData.length;
+  let totalPrice = 0;
+  let tribePrice = 0;
+  let discount = 0;
+
+  const Total = cartData.map((e) => {
+    totalPrice += e.price * e.quantity;
+    tribePrice = +e.tribe;
+
+    discount += +e.discount * +e.quantity;
+  });
+  //console.log(totalPrice-discount)
+  const handledec = (id) => {
+    const filterData = cartData.filter((e) => {
+      if (e.id === id && e.quantity > 1) {
+        e.quantity--;
+      }
+      return e;
+    });
+    setData([...filterData]);
+  };
+  const handleinc = (id) => {
+    const filterData = cartData.filter((e) => {
+      if (e.id === id) {
+        e.quantity++;
+      }
+      return e;
+    });
+
+    setData([...filterData]);
+  };
+
+  const getData = () => {
+    setData([...cartData]);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+// if(id==undefined)
 // {
-//  return(
-   
-//    <>
-//    <CartLists />
-   
-//    </>
-//  )
-// }else
-// {
-//  // navigate("Home/SignIn")
-
+//   return
 // }
-// }
-// const CartLists = () => {
- 
-  
-//   const aData = useSelector((state) => state.addressData.address);
-//   const Dispatch = useDispatch();
 
- 
-//   const [incProduct, setIncProduct] = useState(1);
-//   const handleDelete = (i) => {
-//     axios
-//       .put(`https://ecommrcebackend.herokuapp.com/carts/${i}`)
-//       .then((response) => {
-//         // console.log(response.status);
-//         // console.log(response.data);
-//         Dispatch(fetchCartProduct());
-//         setData([...cartProducts]);
-//       })
-//       .catch((e) => console.log("something went wrong :(", e));
-//   };
-
-//   useEffect(() => {
-//     Dispatch(fetchCartProduct());
-//   }, []);
-//   data.map((e) => {});
- 
-//   const id= aData._id
-  
-//   const numberOfItem = data.length;
-//   let totalPrice = 0;
-//   let tribePrice = 0;
-//   let discount = 0;
-
-//   const Total = cartProducts.map((e) => {
-//     totalPrice += e.price * e.quantity;
-//     tribePrice = +e.tribe;
-
-//     discount += +e.discount * +e.quantity;
-//   });
-//   //console.log(totalPrice-discount)
-//   const handledec = (id) => {
-//     const filterData = data.filter((e) => {
-//       if (e.id === id && e.quantity > 1) {
-//         e.quantity--;
-//       }
-//       return e;
-//     });
-//     setData([...filterData]);
-//   };
-//   const handleinc = (id) => {
-//     const filterData = cartProducts.filter((e) => {
-//       if (e.id === id) {
-//         e.quantity++;
-//       }
-//       return e;
-//     });
-
-//     setData([...filterData]);
-//   };
-
-//   const getData = () => {
-//     setData([...cartProducts]);
-//   };
-
-//   useEffect(() => {
-//     getData();
-//   }, []);
-// // if(id==undefined)
-// // {
-// //   return
-// // }
-
-//   const amountToPay = totalPrice - discount;
+  const amountToPay = totalPrice - discount;
 
   return (
     <React.Fragment>
     
       <Header />
 
-      <div style={{ display: "flex" }}>
-        <div className="left">
+    
+      <div style={{ display: "flex" ,height:"50px"}}>
+        <div style={{height:"50px"}} className="left">
           <div
             style={{
-              border: ".5px solid black",
+              border: ".5px solid gray",
               backgroundColor: "#ffffe0",
               marginTop: "15px",
+              height:"30px",
+              
             }}
           >
-            <h4>My Bag items {"numberOfItem"}</h4>
+            <h4>My Bag items {numberOfItem}</h4>
           </div>
           <div className="container">
-            {[].map((e, index) => (
-              <div className="flex" key={index}>
+            {data.length?cartData.map((e, index) => (
+              <div style={{border:"1px solid gray"}}  className="flex" key={index}>
                 <div>
-                  <h4>{"e.id"}</h4>
+                  <h4>{e.id}</h4>
                 </div>
-                <img style={{ width: "12%" }} src={""} alt="" />
+                <img style={{ width: "12%" }} src={e.image1} alt="" />
                 <div>
-                  <h4>{"efd"}</h4>
+                  <h4>{e.title}</h4>
                 </div>
                 <div>
-                  <h4> ₹{""}</h4>
+                  <h4> ₹{e.price * e.quantity}</h4>
                 </div>
                 <div style={{ padding: "5px" }}>
                   <button
                     style={{ width: "40px" }}
                     onClick={() => {
-                    //   handleinc(e.id);
+                      handleinc(e.id);
                     }}
                   >
                     +
@@ -143,14 +116,14 @@ import { useDispatch, useSelector } from "react-redux";
                 </div>
                 <div style={{ padding: "5px" }}>
                   <button style={{ width: "40px", margin: "" }}>
-                    {"e.quantity"}
+                    {e.quantity}
                   </button>
                 </div>
                 <div style={{ padding: "5px" }}>
                   <button
                     style={{ width: "40px" }}
                     onClick={() => {
-                    //   handledec(e.id);
+                      handledec(e.id);
                     }}
                   >
                     -
@@ -159,14 +132,17 @@ import { useDispatch, useSelector } from "react-redux";
                 <div style={{ padding: "5px" }}>
                   <button
                     onClick={() => {
-                    //   handleDelete(e._id);
+                      // handleDelete(e._id);
+                      
+                      dispatch(delete_cart_item(e.id))
                     }}
                   >
                     Delete
                   </button>
                 </div>
               </div>
-            ))}
+            ))
+            :<EmptyCart/>}
           </div>
         </div>
         <div
@@ -186,25 +162,27 @@ import { useDispatch, useSelector } from "react-redux";
               border: ".5px solid white ",
               borderRadius: "5px 5px 1px 1px",
               backgroundColor: "#ffa500",
+              height:"30px"
             }}
           >
-            <h4>Save Extra With Tribe{"tribePrice"}</h4>
+            <h4>Save Extra With Tribe{tribePrice}</h4>
           </div>
           <div
             style={{
               border: ".5px solid white",
               borderRadius: "1px 1px 1px 5px",
               backgroundColor: "#ffffe0",
+              height:"30px"
             }}
           >
-            <h4>Price Summary</h4>
+            <h4 >Price Summary</h4>
           </div>
-          <h4>Total Price: {"totalPrice"}</h4>
-          <h4> Discount: {"discount"}</h4>
-          <h4> Delivery Price: {"Free"}</h4>
-          <h4>Payable Amount :{"totalPrice - discount"}</h4>
+          <h4 style={{paddingTop:"10px"}}>Total Price: {totalPrice}</h4>
+          <h4 style={{paddingTop:"10px"}}> Discount: {discount}</h4>
+          <h4 style={{paddingTop:"10px"}}> Delivery Price: {"Free"}</h4>
+          <h4 style={{paddingTop:"10px"}}>Payable Amount :{totalPrice - discount}</h4>
 
-        <div style={{display:"flex"}}>
+        <Box style={{display:"flex"}}>
        
           {/* <Button
             sx={{
@@ -219,23 +197,25 @@ import { useDispatch, useSelector } from "react-redux";
               Add Address
             </Link>
           </Button> */}
-   
-          <button
-            style={{
+        
+          <Button
+            sx={{
               color: "black",
               backgroundColor: "#ffa500",
               width: "50%",
-              marginLeft: "25%",
+           marginLeft:"4.5%",
+           marginTop:"2%"
             }}
           >
             {" "}
-            <Link to={`ordersummary/${"id "}`} style={{ textDecoration: "none" }}>
+            <Link to={`ordersummary/${id }`} style={{ textDecoration: "none" }}>
               CkeakOut
             </Link>
-          </button>
-        </div>
+          </Button>
+        </Box>
         </div>
       </div>
+    
     </React.Fragment>
   );
 };
