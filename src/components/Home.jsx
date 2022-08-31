@@ -9,7 +9,7 @@ function Home(){
         <>
          <Header />
         <ProductListing /> 
-         <ProductDetails />
+         {/* <ProductDetails /> */}
          
      </>
     )
