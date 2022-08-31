@@ -8,8 +8,9 @@ function Home(){
     return (
         <>
          <Header />
-        <ProductListing />
-         {/* <ProductDetails /> */}
+        <ProductListing /> 
+         <ProductDetails />
+         
      </>
     )
 }
