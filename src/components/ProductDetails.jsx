@@ -73,8 +73,9 @@ const  [product,setproduct]=useState({})
  
   return (
     <React.Fragment>
-
+<Header />
 <div
+      
         style={{
           border: "1px solid gray",
           width: "80%",
@@ -131,7 +132,7 @@ const  [product,setproduct]=useState({})
             alt=""
           />
         </div>
-        <div style={{ width: "50%", margin: "20px",fontSize:"16px",padding:"2%",lineHeight:"16px"}}>
+        <div style={{ width: "50%",fontSize:"16px",padding:"2%",lineHeight:"16px"}}>
           <h4>{product.title}</h4>
           <h4>Price  :{product.price}</h4>
           {/* <h4>Rating:{product.rating.rate}</h4> */}
@@ -141,24 +142,46 @@ const  [product,setproduct]=useState({})
 
           <h4>Discount:{product.discount}</h4>
 
-          <button
+         <div style={{display:"flex",margin:"2px",width:"100%"}}>
+         <button
            
-            style={{
-              marginLeft: "25px",
-              width: "80%",
-              backgroundColor: "#ffd84d",
-              height: "35px",
-              fontSize: "20px",
-              color: "black",
-              border:"none"
-            }}
-            onClick={() => {
-              addToCart();
-              alert("Product Added In Cart");
-            }}
-          >
-            Add To Cart
-          </button>
+           style={{
+          
+             width:"50%",
+             backgroundColor: "#ffd84d",
+             height: "35px",
+             fontSize: "20px",
+             marginTop:"20%",
+             border:"none"
+           }}
+           onClick={() => {
+             addToCart();
+             alert("Product Added In Cart");
+           }}
+         >
+           Add To Cart
+         </button>
+         <button
+          
+          style={{
+            marginTop:"20%",
+            width:"50%",
+            backgroundColor: "#ffd84d",
+            height: "35px",
+            fontSize: "20px",
+            color: "black",
+            marginLeft:"2%",
+          
+            border:"none"
+          }}
+          onClick={() => {
+            addToCart();
+            alert("Reviws Added ");
+          }}
+        >
+          Add Review
+        </button>
+         </div>
         </div>
       </div>
     </React.Fragment>
