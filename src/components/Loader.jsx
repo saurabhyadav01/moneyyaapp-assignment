@@ -1,11 +1,10 @@
 import React from "react";
-import "./style/Loader.css"
-
+import  "../style/Loder.css"
 function Loader() {
   return (
     <>
       <div className="loaderBox">
-        <span class="loader"></span>
+        <span className="loader"></span>
       </div>
     </>
   );
