@@ -46,73 +46,7 @@ function ProductListing(){
         <>
          
         <div className="container">
-        <Box sx={{ minWidth: 200, display: "flex " }}>
-        <FormControl
-          sx={{
-            width: "200px",
-            marginLeft: "50px",
-            marginBottom: "1px",
-            marginTop: "5px",
-          }}
-        >
-          <InputLabel id="demo-simple-select-label">Sort By Price</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={""}
-            label="SortByPrice"
-            onChange={handleChange}
-          >
-            <MenuItem value={""}> </MenuItem>
-            <MenuItem value={"highToLow"}>Low To High </MenuItem>
-            <MenuItem value={"LowToHigh"}>HighTo Low</MenuItem>
-          </Select>
-        </FormControl>
-        <FormControl
-          sx={{
-            width: "200px",
-            marginLeft: "50px",
-            marginBottom: "1px",
-            marginTop: "5px",
-          }}
-        >
-          <InputLabel id="demo-simple-select-label">Sort By Rating</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={""}
-            label="SortByRating"
-            onChange={handleChange}
-          >
-            <MenuItem value={""}> </MenuItem>
-
-            <MenuItem value={"RatingLowToHigh"}>High To Low Rating</MenuItem>
-            <MenuItem value={"RatingHighLow"}>Low To High rating</MenuItem>
-          </Select>
-        </FormControl>
-        <FormControl
-          sx={{
-            width: "200px",
-            marginLeft: "50px",
-            marginBottom: "1px",
-            marginTop: "5px",
-          }}
-        >
-          <InputLabel id="demo-simple-select-label">Sort By Name</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={""}
-            label="SortByName"
-            onChange={handleChange}
-          >
-            <MenuItem value={""}> </MenuItem>
-
-            <MenuItem value={"AtoZ"}>Diss Name</MenuItem>
-            <MenuItem value={"ZtoA"}>Ass Name</MenuItem>
-          </Select>
-        </FormControl>
-      </Box>
+       
         <h2 style={{textAlign:"center"}}>PRODUCTS</h2>
             <div style={{
                 display:"grid",
@@ -133,8 +67,8 @@ function ProductListing(){
                              <Link to={`products/${e._id}`} style={{ textDecoration: "none" }}>
     
                              <img style={{width:"100%",height:"75%"}} src={e.image1} alt="" />
-                       <h4> Title : {e.title}</h4>
-                       <h4>Price : { e.price}</h4>
+                       <h4 style={{textDecoraton:"none"}}> Title : {e.title}</h4>
+                       <h4  style={{textDecoraton:"none"}}>Price : { e.price}</h4>
     
                        <button
                       style={{
