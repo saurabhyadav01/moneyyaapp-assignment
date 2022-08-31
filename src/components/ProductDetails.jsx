@@ -133,12 +133,13 @@ const  [product,setproduct]=useState({})
            
            style={{
           
-             width:"50%",
+             width:"860%",
              backgroundColor: "#ffd84d",
              height: "35px",
              fontSize: "20px",
              marginTop:"20%",
-             border:"none"
+             border:"none",
+             marginLeft:"25px"
            }}
            onClick={() => {
             let itemIndex=cartData.findIndex((e)=>e.id==product.id)
@@ -154,25 +155,7 @@ const  [product,setproduct]=useState({})
          >
            Add To Cart
          </button>
-         <button
-          
-          style={{
-            marginTop:"20%",
-            width:"50%",
-            backgroundColor: "#ffd84d",
-            height: "35px",
-            fontSize: "20px",
-            color: "black",
-            marginLeft:"2%",
-          
-            border:"none"
-          }}
-          onClick={() => {
-          
-          }}
-        >
-          Add Review
-        </button>
+        
          </div>
         </div>
       </div>

@@ -184,34 +184,8 @@ import Footer from "./Footer";
 
         <Box style={{display:"flex"}}>
        
-          {/* <Button
-            sx={{
-              color: "black",
-              backgroundColor: "#ffa500",
-              width: "50%",
-              marginLeft: "20px",
-            }}
-          >
-            {" "}
-            <Link to="oderSummary" style={{ textDecoration: "none" }}>
-              Add Address
-            </Link>
-          </Button> */}
-        
-          <Button
-            sx={{
-              color: "black",
-              backgroundColor: "#ffa500",
-              width: "50%",
-           marginLeft:"4.5%",
-           marginTop:"2%"
-            }}
-          >
-            {" "}
-            <Link to={`ordersummary/${id }`} style={{ textDecoration: "none" }}>
-              CkeakOut
-            </Link>
-          </Button>
+         
+    
         </Box>
         </div>
       </div>
@@ -220,39 +194,6 @@ import Footer from "./Footer";
   );
 };
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 500,
-  bgcolor: 'background.paper',
 
-  boxShadow: 24,
-  p: 4,
-};
-
-// function BasicModal() {
-//   const [open, setOpen] = React.useState(false);
-//   const handleOpen = () => setOpen(true);
-//   const handleClose = () => setOpen(false);
-
-//   return (
-//     <div>
-//       <Button onClick={handleOpen} sx={{color: "black",
-//               backgroundColor: "#ffa500",width:"200%",marginLeft:"10%"}}>Add Address</Button>
-//       <Modal
-//         open={open}
-//         onClose={handleClose}
-//         aria-labelledby="modal-modal-title"
-//         aria-describedby="modal-modal-description"
-//       >
-//         <Box sx={style}>
-//          <Address />
-//         </Box>
-//       </Modal>
-//     </div>
-//   );
-// }
 
 export default Cart;
